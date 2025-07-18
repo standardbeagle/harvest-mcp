@@ -5,9 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2025-01-18
+## [0.1.0] - 2025-01-18
 
 ### Added
+- **NPM Package**: Published as `@standardbeagle/harvest-mcp` for easy installation via `npx -y @standardbeagle/harvest-mcp`
 - Initial release of Harvest MCP Server
 - Complete Harvest API v2 integration with 15 specialized tools
 - Time entry management (create, update, delete, list)

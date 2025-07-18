@@ -925,10 +925,10 @@ Each assignment includes:
   // Version Information
   getVersion(): string {
     return JSON.stringify({
-      name: 'harvest-mcp',
-      version: '1.0.0',
+      name: '@standardbeagle/harvest-mcp',
+      version: '0.1.0',
       description: 'Model Context Protocol server for Harvest API integration',
-      author: 'Harvest MCP',
+      author: 'standardbeagle',
       license: 'MIT',
       repository: 'https://github.com/standardbeagle/harvest-mcp',
       mcpVersion: '2025-06-18',

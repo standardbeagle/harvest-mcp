@@ -409,8 +409,8 @@ describe('Harvest MCP Server - Read-Only Integration Tests', () => {
       expect(typeof response).toBe('object');
       
       // Response is already parsed as JSON object by callMCPTool
-      expect(response).toHaveProperty('name', 'harvest-mcp');
-      expect(response).toHaveProperty('version', '1.0.0');
+      expect(response).toHaveProperty('name', '@standardbeagle/harvest-mcp');
+      expect(response).toHaveProperty('version', '0.1.0');
       expect(response).toHaveProperty('description');
       expect(response).toHaveProperty('mcpVersion', '2025-06-18');
       expect(response).toHaveProperty('harvestApiVersion', 'v2');

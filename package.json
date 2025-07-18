@@ -1,6 +1,6 @@
 {
-  "name": "harvest-mcp",
-  "version": "1.0.0",
+  "name": "@standardbeagle/harvest-mcp",
+  "version": "0.1.0",
   "description": "Model Context Protocol server for Harvest API integration",
   "main": "dist/index.js",
   "type": "module",
@@ -18,10 +18,21 @@
     "harvest",
     "api",
     "time-tracking",
-    "model-context-protocol"
+    "model-context-protocol",
+    "claude",
+    "ai-assistant",
+    "productivity"
   ],
-  "author": "",
+  "author": "standardbeagle",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/standardbeagle/harvest-mcp.git"
+  },
+  "homepage": "https://github.com/standardbeagle/harvest-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/standardbeagle/harvest-mcp/issues"
+  },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.16.0",
     "dotenv": "^16.4.5"
@@ -33,10 +44,27 @@
     "typescript": "^5.6.0",
     "vitest": "^2.0.0"
   },
-  "bin": {
-    "harvest-mcp": "./dist/index.js"
-  },
+  "bin": "./dist/index.js",
   "files": [
-    "dist/**/*"
-  ]
+    "dist/index.js",
+    "dist/index.d.ts",
+    "dist/index.js.map",
+    "dist/index.d.ts.map",
+    "dist/harvest-client.js",
+    "dist/harvest-client.d.ts",
+    "dist/harvest-client.js.map",
+    "dist/harvest-client.d.ts.map",
+    "dist/tools.js",
+    "dist/tools.d.ts",
+    "dist/tools.js.map",
+    "dist/tools.d.ts.map",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
