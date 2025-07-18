@@ -74,6 +74,36 @@ npm run build
 npm start
 ```
 
+## Testing
+
+The project includes comprehensive tests to verify integration with the Harvest API:
+
+```bash
+# Run unit tests
+npm test
+
+# Run unit tests in watch mode
+npm run test:watch
+
+# Run integration tests (requires valid .env setup)
+npm run test:integration
+```
+
+### Integration Tests
+
+The integration tests connect to your actual Harvest account and perform read-only operations to verify the MCP server works correctly. These tests:
+
+- Connect to the MCP server via stdio transport
+- Test all 14 available tools
+- Verify proper data structure responses
+- Test error handling for invalid inputs
+- Use actual Harvest API data (read-only operations only)
+
+**Requirements for integration tests:**
+- Valid `.env` file with `HARVEST_ACCOUNT_ID` and `HARVEST_ACCESS_TOKEN`
+- Active Harvest account with some data (projects, time entries, etc.)
+- Network access to Harvest API
+
 ## Using with Claude Desktop
 
 Add the following to your Claude Desktop configuration file:
@@ -101,6 +131,8 @@ Add the following to your Claude Desktop configuration file:
 | `harvest_create_time_entry` | Create a new time entry |
 | `harvest_update_time_entry` | Update an existing time entry |
 | `harvest_delete_time_entry` | Delete a time entry |
+| `harvest_restart_timer` | Restart a stopped time entry timer |
+| `harvest_stop_timer` | Stop a running time entry timer |
 | `harvest_list_projects` | List all projects |
 | `harvest_get_project` | Get details of a specific project |
 | `harvest_list_tasks` | List all tasks |

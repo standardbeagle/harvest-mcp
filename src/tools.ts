@@ -59,6 +59,28 @@ export const tools: Tool[] = [
       required: ['id']
     }
   },
+  {
+    name: 'harvest_restart_timer',
+    description: 'Restart a stopped time entry timer',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'string', description: 'Time entry ID' }
+      },
+      required: ['id']
+    }
+  },
+  {
+    name: 'harvest_stop_timer',
+    description: 'Stop a running time entry timer',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        id: { type: 'string', description: 'Time entry ID' }
+      },
+      required: ['id']
+    }
+  },
 
   // Project Tools
   {

@@ -48,12 +48,13 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 // Handle tool execution
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
+  const typedArgs = args as Record<string, any>;
 
   try {
     switch (name) {
       // Time Entry Tools
       case 'harvest_list_time_entries':
-        const timeEntries = await harvestClient.getTimeEntries(args);
+        const timeEntries = await harvestClient.getTimeEntries(typedArgs);
         return {
           content: [
             {
@@ -64,7 +65,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_create_time_entry':
-        const newTimeEntry = await harvestClient.createTimeEntry(args);
+        const newTimeEntry = await harvestClient.createTimeEntry(typedArgs);
         return {
           content: [
             {
@@ -75,8 +76,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_update_time_entry':
-        const { id, ...updateData } = args;
-        const updatedTimeEntry = await harvestClient.updateTimeEntry(id, updateData);
+        const { id, ...updateData } = typedArgs;
+        const updatedTimeEntry = await harvestClient.updateTimeEntry(id as string, updateData);
         return {
           content: [
             {
@@ -87,19 +88,42 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_delete_time_entry':
-        await harvestClient.deleteTimeEntry(args.id);
+        await harvestClient.deleteTimeEntry(typedArgs.id as string);
         return {
           content: [
             {
               type: 'text',
-              text: `Time entry ${args.id} deleted successfully`,
+              text: `Time entry ${typedArgs.id} deleted successfully`,
+            },
+          ],
+        };
+
+      // Timer Tools
+      case 'harvest_restart_timer':
+        const restartedTimer = await harvestClient.restartTimer(typedArgs.id as string);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(restartedTimer, null, 2),
+            },
+          ],
+        };
+
+      case 'harvest_stop_timer':
+        const stoppedTimer = await harvestClient.stopTimer(typedArgs.id as string);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(stoppedTimer, null, 2),
             },
           ],
         };
 
       // Project Tools
       case 'harvest_list_projects':
-        const projects = await harvestClient.getProjects(args);
+        const projects = await harvestClient.getProjects(typedArgs);
         return {
           content: [
             {
@@ -110,7 +134,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_get_project':
-        const project = await harvestClient.getProject(args.id);
+        const project = await harvestClient.getProject(typedArgs.id as string);
         return {
           content: [
             {
@@ -122,7 +146,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Task Tools
       case 'harvest_list_tasks':
-        const tasks = await harvestClient.getTasks(args);
+        const tasks = await harvestClient.getTasks(typedArgs);
         return {
           content: [
             {
@@ -145,7 +169,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_list_users':
-        const users = await harvestClient.getUsers(args);
+        const users = await harvestClient.getUsers(typedArgs);
         return {
           content: [
             {
@@ -157,7 +181,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Client Tools
       case 'harvest_list_clients':
-        const clients = await harvestClient.getClients(args);
+        const clients = await harvestClient.getClients(typedArgs);
         return {
           content: [
             {
@@ -169,7 +193,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Report Tools
       case 'harvest_time_report':
-        const timeReport = await harvestClient.getTimeReport(args);
+        const timeReport = await harvestClient.getTimeReport(typedArgs);
         return {
           content: [
             {
@@ -181,7 +205,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       // Assignment Tools
       case 'harvest_list_project_assignments':
-        const projectAssignments = await harvestClient.getProjectAssignments(args);
+        const projectAssignments = await harvestClient.getProjectAssignments(typedArgs);
         return {
           content: [
             {
@@ -192,7 +216,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         };
 
       case 'harvest_list_task_assignments':
-        const taskAssignments = await harvestClient.getTaskAssignments(args.project_id, args);
+        const taskAssignments = await harvestClient.getTaskAssignments(typedArgs.project_id as string, typedArgs);
         return {
           content: [
             {
