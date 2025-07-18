@@ -19,7 +19,7 @@ describe('Harvest MCP Server - Read-Only Integration Tests', () => {
       const tools = await mcpClient.client.listTools();
       
       expect(tools.tools).toBeDefined();
-      expect(tools.tools.length).toBe(15);
+      expect(tools.tools.length).toBe(17);
       
       // Verify all expected tools are present
       const toolNames = tools.tools.map(tool => tool.name);
@@ -38,7 +38,9 @@ describe('Harvest MCP Server - Read-Only Integration Tests', () => {
         'harvest_list_project_assignments',
         'harvest_list_task_assignments',
         'harvest_restart_timer',
-        'harvest_stop_timer'
+        'harvest_stop_timer',
+        'about',
+        'version'
       ];
       
       expectedTools.forEach(toolName => {
@@ -358,6 +360,60 @@ describe('Harvest MCP Server - Read-Only Integration Tests', () => {
       
       // Should return at most 10 entries
       expect(response.results.length).toBeLessThanOrEqual(10);
+    });
+  });
+
+  describe('About Tool', () => {
+    test('should return general MCP server information when called without parameters', async () => {
+      const response = await callMCPTool(mcpClient.client, 'about');
+      
+      expect(response).toBeDefined();
+      expect(typeof response).toBe('string');
+      expect(response).toContain('Harvest MCP Server');
+      expect(response).toContain('Model Context Protocol');
+      expect(response).toContain('15 specialized tools');
+      expect(response).toContain('Time Entry Management');
+    });
+
+    test('should return specific tool information when tool parameter is provided', async () => {
+      const response = await callMCPTool(mcpClient.client, 'about', { 
+        tool: 'harvest_create_time_entry' 
+      });
+      
+      expect(response).toBeDefined();
+      expect(typeof response).toBe('string');
+      expect(response).toContain('harvest_create_time_entry');
+      expect(response).toContain('Creates a new time entry');
+      expect(response).toContain('project_id');
+      expect(response).toContain('task_id');
+      expect(response).toContain('Example Usage');
+    });
+
+    test('should handle unknown tool name gracefully', async () => {
+      const response = await callMCPTool(mcpClient.client, 'about', { 
+        tool: 'unknown_tool' 
+      });
+      
+      expect(response).toBeDefined();
+      expect(typeof response).toBe('string');
+      expect(response).toContain('Tool "unknown_tool" not found');
+      expect(response).toContain('Available tools:');
+    });
+  });
+
+  describe('Version Tool', () => {
+    test('should return version information', async () => {
+      const response = await callMCPTool(mcpClient.client, 'version');
+      
+      expect(response).toBeDefined();
+      expect(typeof response).toBe('object');
+      
+      // Response is already parsed as JSON object by callMCPTool
+      expect(response).toHaveProperty('name', 'harvest-mcp');
+      expect(response).toHaveProperty('version', '1.0.0');
+      expect(response).toHaveProperty('description');
+      expect(response).toHaveProperty('mcpVersion', '2025-06-18');
+      expect(response).toHaveProperty('harvestApiVersion', 'v2');
     });
   });
 

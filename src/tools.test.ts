@@ -2,10 +2,10 @@ import { describe, test, expect } from 'vitest';
 import { tools } from './tools.js';
 
 describe('Harvest MCP Tools Definition', () => {
-  test('should export 15 tools', () => {
+  test('should export 17 tools', () => {
     expect(tools).toBeDefined();
     expect(Array.isArray(tools)).toBe(true);
-    expect(tools.length).toBe(15);
+    expect(tools.length).toBe(17);
   });
 
   test('all tools should have required properties', () => {
@@ -18,8 +18,10 @@ describe('Harvest MCP Tools Definition', () => {
       expect(typeof tool.description).toBe('string');
       expect(typeof tool.inputSchema).toBe('object');
       
-      // Tool name should follow harvest_ prefix convention
-      expect(tool.name).toMatch(/^harvest_/);
+      // Tool name should follow harvest_ prefix convention (except 'about' and 'version')
+      if (tool.name !== 'about' && tool.name !== 'version') {
+        expect(tool.name).toMatch(/^harvest_/);
+      }
     });
   });
 
@@ -41,6 +43,8 @@ describe('Harvest MCP Tools Definition', () => {
       'harvest_list_task_assignments',
       'harvest_restart_timer',
       'harvest_stop_timer',
+      'about',
+      'version',
     ];
     
     expectedToolNames.forEach(expectedName => {

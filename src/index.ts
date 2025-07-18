@@ -7,6 +7,33 @@ import { HarvestClient } from './harvest-client.js';
 import { tools } from './tools.js';
 import * as dotenv from 'dotenv';
 
+// Handle CLI arguments before loading environment
+const args = process.argv.slice(2);
+
+// Handle --help
+if (args.includes('--help')) {
+  const helpArg = args.find((_, index) => args[index - 1] === '--help');
+  
+  // Create a temporary client for help info (no environment needed)
+  const tempClient = new HarvestClient({ accountId: 'temp', accessToken: 'temp' });
+  
+  if (helpArg && !helpArg.startsWith('--')) {
+    // --help <toolname>
+    console.log(tempClient.getAboutInfo(helpArg));
+  } else {
+    // --help (general)
+    console.log(tempClient.getAboutInfo());
+  }
+  process.exit(0);
+}
+
+// Handle --version
+if (args.includes('--version')) {
+  const tempClient = new HarvestClient({ accountId: 'temp', accessToken: 'temp' });
+  console.log(tempClient.getVersion());
+  process.exit(0);
+}
+
 // Load environment variables
 dotenv.config();
 
@@ -117,6 +144,30 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             {
               type: 'text',
               text: JSON.stringify(stoppedTimer, null, 2),
+            },
+          ],
+        };
+
+      // About Tool
+      case 'about':
+        const aboutInfo = harvestClient.getAboutInfo(typedArgs?.tool as string);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: aboutInfo,
+            },
+          ],
+        };
+
+      // Version Tool
+      case 'version':
+        const versionInfo = harvestClient.getVersion();
+        return {
+          content: [
+            {
+              type: 'text',
+              text: versionInfo,
             },
           ],
         };
