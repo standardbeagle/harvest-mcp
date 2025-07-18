@@ -1,0 +1,40 @@
+{
+  "name": "harvest-mcp",
+  "version": "1.0.0",
+  "description": "Model Context Protocol server for Harvest API integration",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "watch": "nodemon --exec tsx src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "harvest",
+    "api",
+    "time-tracking",
+    "model-context-protocol"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.16.0",
+    "dotenv": "^16.4.5",
+    "harvest": "^0.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "nodemon": "^3.1.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "bin": {
+    "harvest-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist/**/*"
+  ]
+}
