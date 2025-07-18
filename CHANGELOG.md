@@ -12,10 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Package Optimization**: Reduced package size by excluding test files from distribution
 - **MCP-TUI Support**: Verified compatibility with mcp-tui via npx command
 
+### Fixed
+- **Windows Compatibility**: Added fetch polyfill using node-fetch for Node.js environments without native fetch support
+- **Cross-Platform Support**: Resolved "fetch not defined" errors on Windows and older Node.js versions
+
 ### Technical Improvements
 - Simplified binary configuration from named binary to default binary path
 - Removed debug logging from production code
 - Optimized file inclusion for npm package distribution
+- Added node-fetch dependency for backwards compatibility with Node.js < 18
 
 ## [0.1.0] - 2025-01-18
 

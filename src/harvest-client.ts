@@ -1,3 +1,11 @@
+// Fetch polyfill for Node.js environments that don't have native fetch
+import nodeFetch from 'node-fetch';
+
+// Polyfill fetch if not available (Node.js < 18)
+if (!globalThis.fetch) {
+  globalThis.fetch = nodeFetch as any;
+}
+
 export interface HarvestConfig {
   accountId: string;
   accessToken: string;
