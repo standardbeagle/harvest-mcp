@@ -72,7 +72,9 @@ export class HarvestClient {
 
   // Time Entries
   async getTimeEntries(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 25 entries per page to stay under token limits
+    const optionsWithDefaults = { per_page: 25, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/time_entries${queryString}`);
   }
 
@@ -115,7 +117,9 @@ export class HarvestClient {
 
   // Projects
   async getProjects(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 25 projects per page to stay under token limits
+    const optionsWithDefaults = { per_page: 25, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/projects${queryString}`);
   }
 
@@ -125,7 +129,9 @@ export class HarvestClient {
 
   // Tasks
   async getTasks(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 50 tasks per page (tasks are smaller objects)
+    const optionsWithDefaults = { per_page: 50, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/tasks${queryString}`);
   }
 
@@ -135,7 +141,9 @@ export class HarvestClient {
 
   // Users
   async getUsers(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 50 users per page (users are smaller objects)
+    const optionsWithDefaults = { per_page: 50, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/users${queryString}`);
   }
 
@@ -149,7 +157,9 @@ export class HarvestClient {
 
   // Clients
   async getClients(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 50 clients per page (clients are smaller objects)
+    const optionsWithDefaults = { per_page: 50, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/clients${queryString}`);
   }
 
@@ -159,19 +169,25 @@ export class HarvestClient {
 
   // Reports  
   async getTimeReport(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 25 report entries per page (reports can be large)
+    const optionsWithDefaults = { per_page: 25, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/reports/time/team${queryString}`);
   }
 
   // Project Assignments
   async getProjectAssignments(options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 50 assignments per page (assignments are smaller objects)
+    const optionsWithDefaults = { per_page: 50, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/users/me/project_assignments${queryString}`);
   }
 
   // Task Assignments
   async getTaskAssignments(projectId: string, options?: any) {
-    const queryString = this.buildQueryString(options);
+    // Default to 50 task assignments per page (assignments are smaller objects)
+    const optionsWithDefaults = { per_page: 50, ...options };
+    const queryString = this.buildQueryString(optionsWithDefaults);
     return this.makeRequest(`/projects/${projectId}/task_assignments${queryString}`);
   }
 
@@ -934,7 +950,7 @@ Each assignment includes:
   getVersion(): string {
     return JSON.stringify({
       name: '@standardbeagle/harvest-mcp',
-      version: '0.2.0',
+      version: '0.3.0',
       description: 'Model Context Protocol server for Harvest API integration',
       author: 'standardbeagle',
       license: 'MIT',

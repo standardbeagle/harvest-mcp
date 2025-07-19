@@ -4,7 +4,7 @@ export const tools: Tool[] = [
   // Time Entry Tools
   {
     name: 'harvest_list_time_entries',
-    description: 'List time entries with optional filters. Use about {"tool": "harvest_list_time_entries"} for detailed usage examples.',
+    description: 'List time entries with optional filters (defaults to 25 per page). Use about {"tool": "harvest_list_time_entries"} for detailed usage examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -103,7 +103,7 @@ export const tools: Tool[] = [
   // Project Tools
   {
     name: 'harvest_list_projects',
-    description: 'List all projects with filtering options. Use about {"tool": "harvest_list_projects"} for detailed parameters and examples.',
+    description: 'List all projects with filtering options (defaults to 25 per page). Use about {"tool": "harvest_list_projects"} for detailed parameters and examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -129,7 +129,7 @@ export const tools: Tool[] = [
   // Task Tools
   {
     name: 'harvest_list_tasks',
-    description: 'List all tasks with filtering options. Use about {"tool": "harvest_list_tasks"} for detailed parameters and examples.',
+    description: 'List all tasks with filtering options (defaults to 50 per page). Use about {"tool": "harvest_list_tasks"} for detailed parameters and examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -151,7 +151,7 @@ export const tools: Tool[] = [
   },
   {
     name: 'harvest_list_users',
-    description: 'List all users in the account with filtering. Use about {"tool": "harvest_list_users"} for detailed parameters and examples.',
+    description: 'List all users in the account with filtering (defaults to 50 per page). Use about {"tool": "harvest_list_users"} for detailed parameters and examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -165,7 +165,7 @@ export const tools: Tool[] = [
   // Client Tools
   {
     name: 'harvest_list_clients',
-    description: 'List all clients with filtering options. Use about {"tool": "harvest_list_clients"} for detailed parameters and examples.',
+    description: 'List all clients with filtering options (defaults to 50 per page). Use about {"tool": "harvest_list_clients"} for detailed parameters and examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -179,7 +179,7 @@ export const tools: Tool[] = [
   // Report Tools
   {
     name: 'harvest_time_report',
-    description: 'Generate detailed time reports for date ranges. Use about {"tool": "harvest_time_report"} for filtering options and examples.',
+    description: 'Generate detailed time reports for date ranges (defaults to 25 per page). Use about {"tool": "harvest_time_report"} for filtering options and examples.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -196,7 +196,7 @@ export const tools: Tool[] = [
   // Assignment Tools
   {
     name: 'harvest_list_project_assignments',
-    description: 'List project assignments for the current user. Use about {"tool": "harvest_list_project_assignments"} for detailed usage.',
+    description: 'List project assignments for the current user (defaults to 50 per page). Use about {"tool": "harvest_list_project_assignments"} for detailed usage.',
     inputSchema: {
       type: 'object',
       properties: {
@@ -207,7 +207,7 @@ export const tools: Tool[] = [
   },
   {
     name: 'harvest_list_task_assignments',
-    description: 'List task assignments for a project. Use about {"tool": "harvest_list_task_assignments"} for detailed workflow and examples.',
+    description: 'List task assignments for a project (defaults to 50 per page). Use about {"tool": "harvest_list_task_assignments"} for detailed workflow and examples.',
     inputSchema: {
       type: 'object',
       properties: {
