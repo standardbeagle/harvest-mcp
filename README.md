@@ -2,6 +2,10 @@
 
 A Model Context Protocol (MCP) server that provides integration with the [Harvest API v2](https://help.getharvest.com/api-v2/).
 
+<a href="https://glama.ai/mcp/servers/@standardbeagle/harvest-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@standardbeagle/harvest-mcp/badge" alt="Harvest Server MCP server" />
+</a>
+
 ## Features
 
 This MCP server provides tools for interacting with Harvest time tracking data:
